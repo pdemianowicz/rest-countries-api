@@ -1,0 +1,16 @@
+/// Colors
+:root {
+  --text: hsl(200, 15%, 8%);
+  --bg: hsl(0, 0%, 98%);
+
+  --elements: hsl(0, 0%, 100%);
+  --hover: hsla(209, 10%, 44%, 0.412);
+  --placeholder: hsl(0, 0%, 52%);
+}
+
+$text: var(--text);
+$bg: var(--bg);
+$secondary-bg: var(--elements);
+$hover: var(--hover);
+$placeholder: var(--placeholder);
+$icon: var(--icon);

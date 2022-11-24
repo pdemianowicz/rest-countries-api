@@ -1,0 +1,411 @@
+:root {
+  --text: hsl(200, 15%, 8%);
+  --bg: hsl(0, 0%, 98%);
+  --elements: hsl(0, 0%, 100%);
+  --hover: hsla(209, 10%, 44%, 0.412);
+  --placeholder: hsl(0, 0%, 52%);
+}
+
+.container {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.dark-mode {
+  --text: hsl(0, 0%, 100%);
+  --bg: hsl(207, 26%, 17%);
+  --elements: hsl(209, 23%, 22%);
+  --hover: hsla(209, 10%, 44%, 0.412);
+  --placeholder: hsl(0, 0%, 100%);
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul,
+li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set core root defaults */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.6;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+*::before,
+*::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:root {
+  font-size: 62.5%;
+  color-scheme: light dark;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Nunito Sans", sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.toggle-theme {
+  color: var(--text);
+  font-size: 1.4rem;
+  font-weight: 600;
+  position: relative;
+}
+@media only screen and (min-width: 40em) {
+  .toggle-theme {
+    font-size: 1.6rem;
+  }
+}
+.toggle-theme .moon-icon {
+  width: 1.5rem;
+  aspect-ratio: 1;
+  margin-right: 0.5rem;
+  margin-bottom: -0.2rem;
+}
+
+.country-filter {
+  width: fit-content;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 99;
+}
+.country-filter button {
+  padding: 1.5rem 3rem;
+  font-size: 1.4rem;
+  border-radius: 0.5rem;
+  color: var(--text);
+  background-color: var(--elements);
+}
+.country-filter button .arrow_down-icon {
+  width: 2.4rem;
+  aspect-ratio: 1;
+  margin: auto -0.8rem -0.8rem 3rem;
+}
+.country-filter ul {
+  width: 100%;
+  display: none;
+  position: absolute;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--elements);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+.country-filter ul[data-visible=true] {
+  display: block;
+}
+.country-filter ul li {
+  padding: 0.5rem 3rem;
+  width: 100%;
+  color: var(--text);
+  cursor: pointer;
+}
+.country-filter ul li:hover {
+  background-color: var(--hover);
+}
+
+.card-country {
+  width: 100%;
+  max-width: 33rem;
+  background-color: var(--elements);
+  border-radius: 0.5rem;
+  margin: 0 auto;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+.card-country:hover {
+  transform: scale(1.05);
+}
+.card-country__picture img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 5/3;
+  object-fit: cover;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+.card-country__info {
+  padding: 2rem 3rem 5rem 3rem;
+}
+.card-country__info h2 {
+  font-size: 2.4rem;
+  padding-bottom: 1rem;
+  word-wrap: break-word;
+  line-height: 1.3;
+}
+.card-country__info li {
+  font-weight: 600;
+}
+.card-country__info li span {
+  font-weight: 300;
+}
+
+.country {
+  display: grid;
+  justify-self: center;
+  gap: 5rem;
+}
+@media only screen and (min-width: 40em) {
+  .country {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (min-width: 40em) and (min-width: 900px) {
+  .country {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media only screen and (min-width: 40em) and (min-width: 900px) and (min-width: 1200px) {
+  .country {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 7rem;
+  }
+}
+
+.header {
+  background-color: var(--elements);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+.header .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.8rem 2rem;
+  max-width: 1568px;
+  margin: 0 auto;
+}
+.header .wrapper h1 {
+  font-size: 1.6rem;
+}
+@media only screen and (min-width: 40em) {
+  .header .wrapper h1 {
+    font-size: 2.6rem;
+  }
+}
+
+form {
+  display: grid;
+  gap: 3rem;
+}
+@media only screen and (min-width: 40em) {
+  form {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+form label {
+  display: flex;
+  border-radius: 0.5rem;
+  background-color: var(--elements);
+  padding: 1.25rem;
+  position: relative;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+@media only screen and (min-width: 40em) {
+  form label {
+    max-width: 555px;
+  }
+}
+form label .search-icon {
+  width: 2rem;
+  aspect-ratio: 1;
+  margin-left: 1.5rem;
+  margin-bottom: 0.2rem;
+  color: var(--placeholder);
+}
+form label input {
+  width: 100%;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-weight: 600;
+  background-color: var(--elements);
+  padding-left: 2.5rem;
+}
+form label input::placeholder {
+  color: var(--placeholder);
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+@media only screen and (min-width: 40em) {
+  form .country-filter {
+    margin-left: auto;
+  }
+}
+
+main {
+  max-width: 1568px;
+  margin: 0 auto;
+  display: grid;
+  gap: 3rem;
+  padding: 2rem;
+}
+
+.country-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4rem;
+  padding: 0.5rem;
+}
+@media only screen and (min-width: 65em) {
+  .country-detail {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.country-detail a {
+  width: fit-content;
+  padding: 0.8rem 3rem;
+  font-size: 1.4rem;
+  border-radius: 0.5rem;
+  color: var(--text);
+  background-color: var(--elements);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin-bottom: 3rem;
+}
+.country-detail a .arrow_left-icon {
+  width: 100%;
+  width: 1.3rem;
+  aspect-ratio: 1;
+  margin: auto 0.8rem -0.2rem auto;
+}
+.country-detail .picture {
+  max-width: 60rem;
+}
+@media only screen and (min-width: 40em) {
+  .country-detail .picture {
+    grid-area: 2/1/2/2;
+  }
+}
+.country-detail .picture img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 5/3;
+  object-fit: cover;
+}
+.country-detail .card-country-detail {
+  font-weight: 600;
+}
+@media only screen and (min-width: 40em) {
+  .country-detail .card-country-detail {
+    grid-area: 2/2/2/3;
+  }
+}
+.country-detail .card-country-detail h2 {
+  font-size: 2.4rem;
+  padding-bottom: 1.5rem;
+  word-wrap: break-word;
+  line-height: 1.3;
+}
+.country-detail .card-country-detail span {
+  font-weight: 300;
+}
+.country-detail .card-country-detail > ul {
+  display: grid;
+  gap: 4rem;
+}
+@media only screen and (min-width: 40em) {
+  .country-detail .card-country-detail > ul {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.country-detail .card-country-detail > ul li {
+  padding: 0.5rem 0;
+}
+@media only screen and (min-width: 40em) {
+  .country-detail .card-country-detail > ul .border-countries {
+    grid-area: 2/1/2/3;
+  }
+}
+.country-detail .card-country-detail > ul .border-countries span {
+  font-size: 1.4rem;
+  padding: 0.5rem 2rem;
+  background-color: var(--elements);
+  border-radius: 0.25rem;
+  font-weight: 300;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,56 @@
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-center-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-center-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+//shape : circle
+@mixin circle($size, $color) {
+  width: $size;
+  height: $size;
+  background-color: $color;
+  border-radius: 50%;
+}
+
+@mixin mq($key) {
+  $size: map-get($breakpoints, $key);
+
+  @media only screen and (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin themify($property, $key, $themes: $themes) {
+  @each $theme, $colors in $themes {
+    &.theme-#{$theme},
+    .theme-#{$theme} & {
+      #{$property}: map-get($colors, $key);
+    }
+  }
+}
+
+@mixin color($arguments...) {
+  @include themify("color", $arguments...);
+}
+
+@mixin background-color($arguments...) {
+  @include themify("background-color", $arguments...);
+}
+
+@mixin border-color($arguments...) {
+  @include themify("border-color", $arguments...);
+}

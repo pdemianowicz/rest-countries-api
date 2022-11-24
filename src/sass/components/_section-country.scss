@@ -1,0 +1,15 @@
+.country {
+  display: grid;
+  justify-self: center;
+  gap: 5rem;
+  @include mq(small) {
+    grid-template-columns: 1fr 1fr;
+    @media (min-width: 900px) {
+      grid-template-columns: 1fr 1fr 1fr;
+      @media (min-width: 1200px) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 7rem;
+      }
+    }
+  }
+}

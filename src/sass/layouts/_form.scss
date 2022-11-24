@@ -1,0 +1,50 @@
+form {
+  display: grid;
+
+  gap: 3rem;
+  @include mq(small) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  label {
+    display: flex;
+    border-radius: 0.5rem;
+    background-color: $secondary-bg;
+    padding: 1.25rem;
+    position: relative;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    @include mq(small) {
+      max-width: 555px;
+    }
+
+    & .search-icon {
+      width: 2rem;
+      aspect-ratio: 1;
+      margin-left: 1.5rem;
+      margin-bottom: 0.2rem;
+      color: $placeholder;
+    }
+
+    input {
+      width: 100%;
+      border: none;
+      outline: none;
+      color: $text;
+      font-weight: 600;
+      background-color: $secondary-bg;
+      padding-left: 2.5rem;
+
+      &::placeholder {
+        color: $placeholder;
+        font-size: 1.5rem;
+        font-weight: 300;
+      }
+    }
+  }
+
+  .country-filter {
+    @include mq(small) {
+      margin-left: auto;
+    }
+  }
+}

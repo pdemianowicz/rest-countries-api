@@ -1,0 +1,9 @@
+/// Dark mode
+.dark-mode {
+  --text: hsl(0, 0%, 100%);
+  --bg: hsl(207, 26%, 17%);
+
+  --elements: hsl(209, 23%, 22%);
+  --hover: hsla(209, 10%, 44%, 0.412);
+  --placeholder: hsl(0, 0%, 100%);
+}
