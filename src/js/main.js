@@ -1,32 +1,40 @@
 import { themeSwitcher } from "./modules/themeSwitcher.js";
 import { renderCard } from "./modules/renderCard.js";
-// import { searchCountry } from "./modules/searchCountry.js";
-import { renderDetailCard } from "./modules/renderDetailCard.js";
+import { checkClickedCountry } from "./modules/renderDetailCard.js";
 
 const btnFilter = document.querySelector(".toggle-btn");
 const drowndownContent = document.querySelector(".dropdown-content");
 themeSwitcher();
 
-fetch("https://restcountries.com/v3.1/all")
+const apiLink = `https://restcountries.com/v3.1/all`,
+  specifiedFields = `?fields=name,population,region,capital,flags,cca3`;
+
+fetch(`${apiLink}${specifiedFields}`)
   .then((response) => response.json())
   .then((data) => {
-    console.log(data);
-    if (window.location.search.includes("?name=")) {
-      const searchParams = new URLSearchParams(window.location.search);
-      const countryCode = searchParams.get("name");
-      document.querySelector("nav").remove();
-      document.querySelector(".country").innerHTML = "";
-
-      data.filter((item) => {
-        if (item.name.common === countryCode) return renderDetailCard(item);
-      });
-    } else {
-      renderCard(data);
-      searchCountry(data);
-      filterByRegion(data);
-    }
+    renderCard(data);
+    filterByRegion(data);
+    searchCountry(data);
+    moreDetailCard(data);
   })
   .catch((error) => console.error(error));
+
+function moreDetailCard(data) {
+  if (window.location.search.includes("?name=")) {
+    const searchParams = new URLSearchParams(window.location.search);
+    const countryCode = searchParams.get("name");
+    document.querySelector("nav").remove();
+    document.querySelector(".country").innerHTML = "";
+
+    data.filter((item) => {
+      console.log(item);
+      if (item.cca3 === countryCode || item.name.common === countryCode) {
+        checkClickedCountry(item);
+      }
+      return;
+    });
+  }
+}
 
 function searchCountry(data) {
   const form = document.querySelector("form");

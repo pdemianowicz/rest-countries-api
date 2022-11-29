@@ -1,77 +1,64 @@
-export function renderDetailCard(e) {
-  const countryFlag = e.flags.png;
-  const countryName = e.name.common;
-  const countryNatiweName = getCurrencies(e.name.nativeName)?.[0].official;
-  const countryPopulation = e.population;
-  const countryRegion = e.region;
-  const countrySubRegion = e.subregion;
-  const countryCapital = e.capital;
+export function checkClickedCountry(e) {
+  const apiLink = `https://restcountries.com/v3.1/all`,
+    specifiedFields = `?fields=flags,name,nativeName,population,region,subregion,capital,topLevelDomain,currencies,languages,borders,cca3`;
 
-  const countryTLD = e.tld;
-  const countryCurrencies = getCurrencies(e.currencies)?.[0].name;
-  const countryLanguages = getCurrencies(e.languages)?.join(", "); // array
+  fetch(`${apiLink}${specifiedFields}`)
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((data) => {
+        if (e.name.common !== data.name.common) return;
+        renderDetailCard(data);
+      });
+    })
+    .catch((error) => console.error(error));
 
-  const countryBorder = getCurrencies(e.borders); // array ?.join(", ")
-  const countryCCA2 = e.altSpellings[0];
+  function renderDetailCard(e) {
+    const countryFlag = e.flags.png;
+    const countryName = e.name.common;
+    const countryNatiweName = getCurrencies(e.name.nativeName)?.[0].official;
+    const countryPopulation = e.population;
+    const countryRegion = e.region;
+    const countrySubRegion = e.subregion;
+    const countryCapital = e.capital;
 
-  // const wynik = cos();
-  // // console.log(wynik);
+    const countryTLD = e.tld;
+    const countryCurrencies = getCurrencies(e.currencies)?.[0].name;
+    const countryLanguages = getCurrencies(e.languages)?.join(", "); // array
 
-  // if (wynik === countryCCA2) {
-  //   console.log("Pasuje");
-  // }
-  //
-  // function cos() {
-  //   if (countryBorder) {
-  //     for (const [key, value] of Object.entries(e.borders)) {
-  //       // console.log(`${key}: ${value}`);
-  //       return value;
-  //     }
-  //   } else {
-  //     return;
-  //   }
-  // }
-  // const country = document.querySelector(".country-detail");
-  // const div = document.createElement("div");
-  // const ul = document.createElement("ul");
-  // div.classList.add("card-country");
-
-  const stringToInject = `
-  <a href="index.html">
-  <svg class="arrow_left-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-    <title>arrow-left</title>
-    <path fill="currentColor" d="M3.828 9l6.071-6.071-1.414-1.414-8.485 8.485 8.485 8.485 1.414-1.414-6.071-6.071h16.172v-2h-16.172z">
-    </path></svg> Back </a>
- <div class="picture">
-   <img src="${countryFlag}" alt="" />
- </div>
- <div class="card-country-detail">
-   <h2>${countryName}</h2>
-   <ul>
-     <ul>
-     <li>Native Name: <span>${countryNatiweName}</span></li>
-       <li>Population: <span>${countryPopulation}</span></li>
-       <li>Region: <span>${countryRegion}</span></li>
-       <li>Sub Region: <span>${countrySubRegion}</span></li>
-       <li>Capital: <span>${countryCapital}</span></li>
-     </ul>
-     <ul>
-       <li>Top Level Domain: <span>${countryTLD}</span></li>
-       <li>Currencies: <span>${countryCurrencies}</span></li>
-       <li>Languages: <span>${countryLanguages}</span></li>
-     </ul>
-     <ul class="border-countries">
-       <li>
-         Border Countries:
-         <span>${countryBorder}</span>
-         <span>Germany</span>
-         <span>Netherlands</span>
-       </li>
-     </ul>
-   </ul>
- </div>`;
-
-  document.querySelector(".country-detail").innerHTML = stringToInject;
+    const stringToInject = `
+      <a href="index.html">
+      <svg class="arrow_left-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <title>arrow-left</title>
+        <path fill="currentColor" d="M3.828 9l6.071-6.071-1.414-1.414-8.485 8.485 8.485 8.485 1.414-1.414-6.071-6.071h16.172v-2h-16.172z">
+        </path></svg> Back </a>
+     <div class="picture">
+       <img src="${countryFlag}" alt="" />
+     </div>
+     <div class="card-country-detail">
+       <h2>${countryName}</h2>
+       <ul>
+         <ul>
+         <li>Native Name: <span>${countryNatiweName}</span></li>
+           <li>Population: <span>${countryPopulation}</span></li>
+           <li>Region: <span>${countryRegion}</span></li>
+           <li>Sub Region: <span>${countrySubRegion}</span></li>
+           <li>Capital: <span>${countryCapital}</span></li>
+         </ul>
+         <ul>
+           <li>Top Level Domain: <span>${countryTLD}</span></li>
+           <li>Currencies: <span>${countryCurrencies}</span></li>
+           <li>Languages: <span>${countryLanguages}</span></li>
+         </ul>
+         <ul class="border-countries">
+           <li>
+             Border Countries:
+             ${e.borders.map((border) => ` <a href="index.html?name=${border}">${border}</a> `).join("")}
+           </li>
+         </ul>
+       </ul>
+     </div>`;
+    document.querySelector(".country-detail").innerHTML = stringToInject;
+  }
 }
 
 function getCurrencies(x) {
